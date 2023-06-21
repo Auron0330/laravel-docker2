@@ -5,10 +5,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   libzip-dev \
   python3 \
   unzip \
+  && apt-get install -y \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
+  && docker-php-ext-configure gd --with-freetype-dir --with-jpeg-dir --with-png-dir\
   && docker-php-ext-install \
     pdo_mysql \
     sockets \
     zip \
+    gd \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
